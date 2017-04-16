@@ -1,0 +1,39 @@
+{
+  "name": "frontend-nanodegree-resume",
+  "version": "1.0.0",
+  "description": "Udacity Nanodegree JavaScript project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshisadesigner/frontend-nanodegree-resume.git"
+  },
+  "keywords": [
+    "Udacity",
+    "Nanodegree",
+    "JavaScript"
+  ],
+  "author": "Joshisadesigner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshisadesigner/frontend-nanodegree-resume/issues"
+  },
+  "homepage": "https://github.com/joshisadesigner/frontend-nanodegree-resume#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-cache": "^0.4.6",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^3.2.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^2.1.2",
+    "gulp-useref": "^3.1.2",
+    "run-sequence": "^1.2.2"
+  }
+}
