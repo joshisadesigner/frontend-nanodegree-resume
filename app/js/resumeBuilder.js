@@ -40,7 +40,7 @@ var work = {
             "title": "UI/UX Designer",
             "location": "Guatemala City, Guatemala.",
             "dates": "June 2015 to August 2016",
-            "description": ,
+            "description": ""
         }
     ]
 }
@@ -50,8 +50,8 @@ var education = {
         {
             "name": "Universidad de San Carlos de Guatemala",
             "location": "Guatemala City, Guatemala.",
-            "degree": ,
-            "dates": "August 2014"
+            "degree": "",
+            "dates": "August 2014",
             "url": "http://usac.edu.gt/",
             "majors": [ "BA" ]
         }
@@ -67,11 +67,40 @@ var education = {
     ]
 }
 
-var projects: {
-    {
-        "title": ,
-        "dates": ,
-        "description": ,
-        "images": []
-    }
+var projects =
+    [
+        {
+            "title": "",
+            "dates": "",
+            "description": "",
+            "images": []
+        }
+    ]
+
+var formattedHeaderName = HTMLheaderName.replace( '%data%', bio.name );
+var formattedHeaderRole = HTMLheaderRole.replace( '%data%', bio.name );
+
+$( '#header' ).append( formattedHeaderName ).prepend( formattedHeaderRole );
+
+if ( bio.skills.length > 0 ){
+    $( '#header' ).append( HTMLskillsStart );
+
+    bio.skills.forEach( function( element ){
+        var formattedSkills = HTMLskills.replace( '%data%', element );
+        $( '#skills' ).append( formattedSkills );
+    } )
+}
+
+for( var i in work.jobs ) {
+    $( '#workExperience' ).append( HTMLworkStart );
+    var formattedWorkEmployer = HTMLworkEmployer.replace( '%data%', work.jobs[i].employer );
+        $( '#workExperience .work-entry' ).append( formattedWorkEmployer );
+    var formattedWorkTitle = HTMLworkTitle.replace( '%data%', work.jobs[i].title );
+        $( '#workExperience .work-entry' ).append( formattedWorkTitle );
+    var formattedWorkDates = HTMLworkDates.replace( '%data%', work.jobs[i].dates );
+        $( '#workExperience .work-entry' ).append( formattedWorkDates );
+    var formattedWorkLocation = HTMLworkLocation.replace( '%data%', work.jobs[i].location );
+        $( '#workExperience .work-entry' ).append( formattedWorkLocation );
+    var formattedWorkDescription = HTMLworkDescription.replace( '%data%', work.jobs[i].description );
+        $( '#workExperience .work-entry' ).append( formattedWorkDescription );
 }
