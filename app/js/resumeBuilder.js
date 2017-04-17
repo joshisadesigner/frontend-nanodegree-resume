@@ -6,14 +6,14 @@ This is empty on purpose! Your code to build the resume will go here.
 var bio = {
     "name": "Josh",
     "role": "Front-End Web Developer",
-    "contact": [{
+    "contacts": [{
         "mobile": "4276-8065",
         "email": "joshisadesigner@me.com",
         "twitter": "@joshisadesigner",
         "github": "joshisadesigner",
-        "location": "Guatemala"
+        "location": "Guatemala City, Guatemala"
     }],
-    "bioPicture": "images/me.jpg",
+    "biopic": "images/me.jpg",
     "welcomeMessage": "Welcome, I\"m learning front-end development!",
     "skills": [
         "Photoshop",
@@ -50,7 +50,8 @@ var education = {
         {
             "name": "Universidad de San Carlos de Guatemala",
             "location": "Guatemala City, Guatemala.",
-            "degreeDate": "August 2014",
+            "degree": ,
+            "dates": "August 2014"
             "url": "http://usac.edu.gt/",
             "majors": [ "BA" ]
         }
@@ -69,7 +70,7 @@ var education = {
 var projects: {
     {
         "title": ,
-        "date": ,
+        "dates": ,
         "description": ,
         "images": []
     }
