@@ -2,19 +2,36 @@
 This is empty on purpose! Your code to build the resume will go here.
  */
 
+var arrayHelper = {
+    appendList : function( list, placer ){
+        list.forEach( function( element ){
+            $( placer ).append( element );
+            console.log( placer + "   |   " + element)
+        } );
+    },
+    createList : function ( object ){
+        for ( i = 0; i < object.length; i++ ){
+            var list = [];
+            list.push( object[i]);
+            console.log( list );
+        }
+    }
+}
+
+var array = [ 1,2,3,4,5 ];
 
 var bio = {
-    "name": "Josh",
+    "name": "Josh Delacruz",
     "role": "Front-End Web Developer",
-    "welcomeMessage": "Welcome, I\"m learning front-end development!",
-    "biopic": "images/me.jpg",
-    "contacts": [{
+    "contacts": {
         "mobile": "4276-8065",
         "email": "joshisadesigner@me.com",
         "twitter": "@joshisadesigner",
         "github": "joshisadesigner",
         "location": "Guatemala City, Guatemala"
-    }],
+    },
+    "biopic": "images/me.jpg",
+    "welcomeMessage": "Welcome, I\"m learning front-end development!",
     "skills": [
         "Photoshop",
         "Illustrator",
@@ -23,23 +40,56 @@ var bio = {
         "HTML",
         "CSS",
         "JavaScript"
-    ]
+    ],
+    "display": function (){
+        var formattedname = HTMLheaderName.replace( '%data%', bio.name );
+        var formattedRole = HTMLheaderRole.replace( '%data%', bio.role );
+        var formattedPic = HTMLbioPic.replace( '%data%', bio.biopic );
+        var formattedMsg = HTMLwelcomeMsg.replace( '%data%', bio.welcomeMessage );
+
+        var formattedContact = [
+            HTMLmobile.replace( '%data%', bio.contacts.mobile ),
+            HTMLemail.replace( '%data%', bio.contacts.email ),
+            HTMLtwitter.replace( '%data%', bio.contacts.twitter ),
+            HTMLgithub.replace( '%data%', bio.contacts.github ),
+            HTMLlocation.replace( '%data%', bio.contacts.location )
+        ]
+
+
+        var contactsPlacer = '#topContacts, #footerContacts';
+        arrayHelper.appendList( formattedContact, contactsPlacer );
+
+        $( '#header' ).prepend( formattedRole ).prepend( formattedname );
+
+        // arrayHelper.createList( bio.skills );
+        arrayHelper.appendList( bio.skills, '#skills' )
+
+        if ( bio.skills.length > 0 ){
+            $( '#header' ).append( HTMLskillsStart );
+
+            bio.skills.forEach( function( element ){
+                var formattedSkills = HTMLskills.replace( '%data%', element );
+                $( '#skills' ).append( formattedSkills );
+            } )
+        }
+    }
 }
+bio.display();
 
 var work = {
     "jobs": [
         {
             "employer": "Secure IP",
             "title": "Front-End Web Developer",
-            "dates": "August 2016 to Date",
             "location": "Guatemala City, Guatemala.",
+            "dates": "August 2016 to Date",
             "description": "",
         },
         {
             "employer": "Social Media Networks, Inc.",
             "title": "UI/UX Designer",
-            "dates": "June 2015 to August 2016",
             "location": "Guatemala City, Guatemala.",
+            "dates": "June 2015 to August 2016",
             "description": ""
         }
     ]
@@ -82,23 +132,6 @@ var projects =
             "images": [ 'images/p-02-01.jpg', 'images/p-02-02.jpg']
         }
     ]
-bio.display = function() {
-    var formattedHeaderName = HTMLheaderName.replace( '%data%', bio.name );
-    var formattedHeaderRole = HTMLheaderRole.replace( '%data%', bio.name );
-    var formattedBioPic = HTMLbioPic.replace( '%data%', bio.biopic );
-    var formattedWelcomeMsg = HTMLwelcomeMsg.replace( '%data%', bio.welcomeMessage );
-
-    $( '#header' ).prepend( formattedHeaderName ).append( formattedHeaderRole ).append(formattedBioPic,formattedWelcomeMsg);
-    $( '#header' ).append( HTMLskillsStart );
-
-    bio.skills.forEach( function( element ){
-        var formattedSkills = HTMLskills.replace( '%data%', element );
-        $( '#skills' ).append( formattedSkills );
-    } )
-}
-
-bio.display();
-
 
 for( var job in work.jobs ) {
     $( '#workExperience' ).append( HTMLworkStart );
