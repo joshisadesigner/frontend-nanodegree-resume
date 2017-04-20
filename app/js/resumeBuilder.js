@@ -3,22 +3,18 @@ This is empty on purpose! Your code to build the resume will go here.
  */
 
 var arrayHelper = {
-    appendList : function( list, placer ){
+    appendList : function( list, selector ){
         list.forEach( function( element ){
-            $( placer ).append( element );
-            console.log( placer + "   |   " + element)
+            $( selector ).append( element );
         } );
     },
-    createList : function ( object ){
-        for ( i = 0; i < object.length; i++ ){
-            var list = [];
-            list.push( object[i]);
-            console.log( list );
-        }
+    createList : function ( list, placer, selector ){
+        list.forEach( function( element ) {
+            var formatted = placer.replace( '%data%', element );
+            $( selector ).append( formatted );
+        })
     }
 }
-
-var array = [ 1,2,3,4,5 ];
 
 var bio = {
     "name": "Josh Delacruz",
@@ -46,6 +42,7 @@ var bio = {
         var formattedRole = HTMLheaderRole.replace( '%data%', bio.role );
         var formattedPic = HTMLbioPic.replace( '%data%', bio.biopic );
         var formattedMsg = HTMLwelcomeMsg.replace( '%data%', bio.welcomeMessage );
+        var contactsSelector = '#topContacts, #footerContacts';
 
         var formattedContact = [
             HTMLmobile.replace( '%data%', bio.contacts.mobile ),
@@ -55,22 +52,15 @@ var bio = {
             HTMLlocation.replace( '%data%', bio.contacts.location )
         ]
 
-
-        var contactsPlacer = '#topContacts, #footerContacts';
-        arrayHelper.appendList( formattedContact, contactsPlacer );
-
         $( '#header' ).prepend( formattedRole ).prepend( formattedname );
+        $( '#header' ).append( formattedPic );
+        $( '#header' ).append( formattedMsg );
 
-        // arrayHelper.createList( bio.skills );
-        arrayHelper.appendList( bio.skills, '#skills' )
+        arrayHelper.appendList( formattedContact, contactsSelector );
 
         if ( bio.skills.length > 0 ){
             $( '#header' ).append( HTMLskillsStart );
-
-            bio.skills.forEach( function( element ){
-                var formattedSkills = HTMLskills.replace( '%data%', element );
-                $( '#skills' ).append( formattedSkills );
-            } )
+            arrayHelper.createList( bio.skills, HTMLskills, '#skills' );
         }
     }
 }
@@ -83,27 +73,47 @@ var work = {
             "title": "Front-End Web Developer",
             "location": "Guatemala City, Guatemala.",
             "dates": "August 2016 to Date",
-            "description": "",
+            "description": "Front-End Developer and UI/UX Designer role, in charge of the automatization of for the styles and scripts for americavoice.com, my.ameriavoice.com and secureip.io.",
         },
         {
             "employer": "Social Media Networks, Inc.",
             "title": "UI/UX Designer",
             "location": "Guatemala City, Guatemala.",
             "dates": "June 2015 to August 2016",
-            "description": ""
+            "description": "Responsible for UI/UX interface for the client portal that made use of the ssnapp system."
         }
-    ]
+    ],
+    "display": function(){
+
+        for( var job in work.jobs ) {
+            var formattedEmployer = HTMLworkEmployer.replace( '%data%', work.jobs[ job ].employer );
+            var formattedTitle = HTMLworkTitle.replace( '%data%', work.jobs[ job ].title );
+            var formattedEmployerTitle = formattedEmployer + formattedTitle;
+
+            var formatted = [
+                formattedEmployerTitle,
+                HTMLworkDates.replace( '%data%', work.jobs[ job ].dates ),
+                HTMLworkLocation.replace( '%data%', work.jobs[ job ].location ),
+                HTMLworkDescription.replace( '%data%', work.jobs[ job ].description )
+            ]
+
+            $( '#workExperience' ).append( HTMLworkStart );
+            arrayHelper.appendList( formatted, '.work-entry:last' );
+            // $( '.work-entry:last' ).append( formattedEmployerTitle );
+        }
+    }
 }
+work.display();
 
 var education = {
     "schools": [
         {
             "name": "Universidad de San Carlos de Guatemala",
             "location": "Guatemala City, Guatemala.",
-            "degree": "",
+            "degree": "BA",
             "dates": "August 2014",
             "url": "http://usac.edu.gt/",
-            "majors": [ "BA" ]
+            "majors": [ "Multimedia" ]
         }
     ],
     "onlineCourses": [
@@ -114,8 +124,50 @@ var education = {
             "url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001",
             "majors": []
         }
-    ]
+    ],
+    "display": function(){
+
+        var formattedName = HTMLschoolName.replace( '%data%', education.schools.name );
+        var formattedDegree = HTMLschoolDegree.replace( '%data%', education.schools.degree );
+        var formattedDates = HTMLschoolDates.replace( '%data%', education.schools.dates );
+        var formattedLocation = HTMLschoolLocation.replace( '%data%', education.schools.location );
+        var formattedMajor = HTMLschoolMajor.replace( '%data%', education.schools.majors );
+        var formattedNameDegree = formattedName + formattedDegree;
+        $( '#education' ).append( HTMLschoolStart );
+        education.schools.forEach( function( key ){
+            console.log( key );
+        } );
+
+        for ( var i = 0; i < education.length; i++ ){
+            console.log( [i] )
+            element.forEach( function( element ){
+
+                if ( element.hasOwnProperty('name') ){
+                    var formattedName = HTMLschoolName.replace( '%data%', element.name );
+                    var formattedDegree = HTMLschoolDegree.replace( '%data%', element.degree );
+                    $( '.education-entry:last' ).append( formattedName + formattedDegree );
+                }
+
+                if ( element.hasOwnProperty('dates') ){
+                    var formatted = HTMLschoolDates.replace( '%data%', element.dates );
+                    $( '.education-entry:last' ).append( formatted );
+                }
+
+                if ( element.hasOwnProperty('location') ){
+                    var formatted = HTMLschoolLocation.replace( '%data%', element.location );
+                    $( '.education-entry:last' ).append( formatted );
+                }
+
+                if ( element.hasOwnProperty('majors') ){
+                    var formatted = HTMLschoolMajor.replace( '%data%', element.majors );
+                    $( '.education-entry:last' ).append( formatted );
+                }
+
+            });
+        }
+    }
 }
+education.display();
 
 var projects =
     [
@@ -132,17 +184,6 @@ var projects =
             "images": [ 'images/p-02-01.jpg', 'images/p-02-02.jpg']
         }
     ]
-
-for( var job in work.jobs ) {
-    $( '#workExperience' ).append( HTMLworkStart );
-
-    var formattedWorkEmployer = HTMLworkEmployer.replace( '%data%', work.jobs[ job ].employer );
-    var formattedWorkTitle = HTMLworkTitle.replace( '%data%', work.jobs[ job ].title );
-
-    var formattedWorkemployerTitle = formattedWorkEmployer + formattedWorkTitle;
-
-    $( '.work-entry:last' ).append( formattedWorkemployerTitle );
-}
 
 projects.display = function() {
 
