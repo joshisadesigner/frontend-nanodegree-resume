@@ -118,52 +118,43 @@ var education = {
     ],
     "onlineCourses": [
         {
-            "name": "Front-End Web Developer, Nanodegree",
-            "location": "Guatemala City, Guatemala.",
-            "degreeDate": "January 2017",
-            "url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001",
-            "majors": []
+            "title": "Front-End Web Developer, Nanodegree",
+            "school": "Udacity.com",
+            "dates": "January 2017",
+            "url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
         }
     ],
     "display": function(){
 
-        var formattedName = HTMLschoolName.replace( '%data%', education.schools.name );
-        var formattedDegree = HTMLschoolDegree.replace( '%data%', education.schools.degree );
-        var formattedDates = HTMLschoolDates.replace( '%data%', education.schools.dates );
-        var formattedLocation = HTMLschoolLocation.replace( '%data%', education.schools.location );
-        var formattedMajor = HTMLschoolMajor.replace( '%data%', education.schools.majors );
-        var formattedNameDegree = formattedName + formattedDegree;
-        $( '#education' ).append( HTMLschoolStart );
-        education.schools.forEach( function( key ){
-            console.log( key );
-        } );
+        for ( var i = 0; i < education.schools.length; i++ ){
 
-        for ( var i = 0; i < education.length; i++ ){
-            console.log( [i] )
-            element.forEach( function( element ){
+            var formattedName = HTMLschoolName.replace( '%data%', education.schools[i].name );
+            var formattedDegree = HTMLschoolDegree.replace( '%data%', education.schools[i].degree );
+            var formattedDates = HTMLschoolDates.replace( '%data%', education.schools[i].dates );
+            var formattedLocation = HTMLschoolLocation.replace( '%data%', education.schools[i].location );
+            var formattedMajor = HTMLschoolMajor.replace( '%data%', education.schools[i].majors );
 
-                if ( element.hasOwnProperty('name') ){
-                    var formattedName = HTMLschoolName.replace( '%data%', element.name );
-                    var formattedDegree = HTMLschoolDegree.replace( '%data%', element.degree );
-                    $( '.education-entry:last' ).append( formattedName + formattedDegree );
-                }
+            $( '#education' ).append( HTMLschoolStart );
+            $( '.education-entry:last' ).append( formattedName + formattedDegree );
+            $( '.education-entry:last' ).append( formattedDates );
+            $( '.education-entry:last' ).append( formattedLocation );
+            $( '.education-entry:last' ).append( formattedMajor );
 
-                if ( element.hasOwnProperty('dates') ){
-                    var formatted = HTMLschoolDates.replace( '%data%', element.dates );
-                    $( '.education-entry:last' ).append( formatted );
-                }
+        }
 
-                if ( element.hasOwnProperty('location') ){
-                    var formatted = HTMLschoolLocation.replace( '%data%', element.location );
-                    $( '.education-entry:last' ).append( formatted );
-                }
+        for ( var i = 0; i < education.onlineCourses.length; i++ ){
 
-                if ( element.hasOwnProperty('majors') ){
-                    var formatted = HTMLschoolMajor.replace( '%data%', element.majors );
-                    $( '.education-entry:last' ).append( formatted );
-                }
+            var formattedTitle = HTMLonlineTitle.replace( '%data%', education.onlineCourses[i].title );
+            var formattedSchool = HTMLonlineSchool.replace( '%data%', education.onlineCourses[i].school );
+            var formattedDates = HTMLonlineDates.replace( '%data%', education.onlineCourses[i].dates );
+            var formattedUrl = HTMLonlineURL.replace( '%data%', education.onlineCourses[i].url );
 
-            });
+            $( '#education').append( HTMLonlineClasses );
+            $( '#education' ).append( HTMLschoolStart );
+            $( '.education-entry:last' ).append( formattedTitle + formattedSchool );
+            $( '.education-entry:last' ).append( formattedDates );
+            $( '.education-entry:last' ).append( formattedUrl );
+
         }
     }
 }
@@ -193,9 +184,9 @@ projects.display = function() {
         var formattedProjectDates = HTMLprojectDates.replace( '%data%', projects[i].dates );
         var formattedProjectDescription = HTMLprojectDescription.replace( '%data%', projects[i].description );
 
-            $( '.project-entry:last' ).append( formattedProjectTitle );
-            $( '.project-entry:last' ).append( formattedProjectDates );
-            $( '.project-entry:last' ).append( formattedProjectDescription );
+        $( '.project-entry:last' ).append( formattedProjectTitle );
+        $( '.project-entry:last' ).append( formattedProjectDates );
+        $( '.project-entry:last' ).append( formattedProjectDescription );
 
         for ( var a = 0; a < projects[i].images.length; a++ ) {
             var formattedProjectImage = HTMLprojectImage.replace( '%data%', projects[i].images[a] );
