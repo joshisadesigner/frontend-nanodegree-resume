@@ -15,13 +15,13 @@ var gulp            = require( 'gulp' ),
 var reload = browserSync.reload;
 
 gulp.task( 'styles', function(){
-    return gulp.src( 'app/css/*.scss' )
+    return gulp.src( 'app/css/sass/*.scss' )
         .pipe( sourcemaps.init() )
         .pipe( sass( {
             outputStyle: 'expanded'
         } ).on( 'error', sass.logError ) )
         .pipe( autoprefixer( {
-            browsers: [ 'last 2 versions ' ],
+            browsers: [ 'last 2 versions' ],
             cascade: true
         } ) )
         .pipe( sourcemaps.write( './maps' ) )
@@ -66,7 +66,7 @@ gulp.task( 'browser', function(){
         }
     } );
 
-    gulp.watch( 'app/css/**/*.scss', [ 'styles' ] );
+    gulp.watch( 'app/css/sass/*.scss', [ 'styles' ] );
     gulp.watch( 'app/*.html', reload );
     gulp.watch( 'app/js/**/*.js', reload );
 } );
