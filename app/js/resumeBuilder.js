@@ -194,27 +194,26 @@ $('#mapDiv').append(googleMap);
 function getRelationship( x, y ){
     if ( typeof x !== 'number' || typeof y !== 'number' ){
         if ( typeof x === 'number' ) {
-            console.log( 'Can\'t compare relationship because "' + y + '" is not a number' );
-            console.log( typeof x );
+            return 'Can\'t compare relationship because "' + y + '" is not a number' ;
         } else if ( typeof y === 'number' ){
-            console.log( 'Can\'t compare relationship because "' + x + '" is not a number' );
+            return 'Can\'t compare relationship because "' + x + '" is not a number' ;
         } else if ( typeof x !== 'number' && typeof y !== 'number' ) {
-            console.log( 'Can\'t compare relationship because ' + x + ' and ' + y + ' are not numbers')
+            return 'Can\'t compare relationship because ' + x + ' and ' + y + ' are not numbers' ;
         }
     } else if ( x < y ){
-		console.log( '<' );
+		return '<' ;
     } else if ( x > y ){
-		console.log( '>' );
+		return '>' ;
     } else if ( x === y ) {
-        console.log( '=' );
+        return '=' ;
     }
 }
 
-// console.log(getRelationship(1,4));
-// console.log(getRelationship(1,1));
-// console.log(getRelationship("that",2));
-// console.log(getRelationship("this"," something else"));
-// console.log(getRelationship(3));
-// console.log(getRelationship("hi"));
-// console.log(getRelationship(NaN));
+console.log(getRelationship(1,4));
+console.log(getRelationship(1,1));
+console.log(getRelationship("that",2));
+console.log(getRelationship("this"," something else"));
+console.log(getRelationship(3));
+console.log(getRelationship("hi"));
+console.log(getRelationship(NaN));
 console.log(getRelationship(NaN, 1));
