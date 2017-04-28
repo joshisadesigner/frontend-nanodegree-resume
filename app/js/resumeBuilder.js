@@ -191,29 +191,34 @@ projects.display();
 
 $('#mapDiv').append(googleMap);
 
-function getRelationship( x, y ){
-    if ( typeof x !== 'number' || typeof y !== 'number' ){
-        if ( typeof x === 'number' ) {
-            return 'Can\'t compare relationship because "' + y + '" is not a number' ;
-        } else if ( typeof y === 'number' ){
-            return 'Can\'t compare relationship because "' + x + '" is not a number' ;
-        } else if ( typeof x !== 'number' && typeof y !== 'number' ) {
-            return 'Can\'t compare relationship because ' + x + ' and ' + y + ' are not numbers' ;
-        }
-    } else if ( x < y ){
-		return '<' ;
-    } else if ( x > y ){
-		return '>' ;
-    } else if ( x === y ) {
-        return '=' ;
-    }
+
+
+var moonWalkers = [
+  "Neil Armstrong",
+  "Buzz Aldrin",
+  "Pete Conrad",
+  "Alan Bean",
+  "Alan Shepard",
+  "Edgar Mitchell",
+  "David Scott",
+  "James Irwin",
+  "John Young",
+  "Charles Duke",
+  "Eugene Cernan",
+  "Harrison Schmitt"
+];
+
+function alphabetizer(names) {
+    var newArray = [];
+    names.forEach( function( element ){
+        nameArray = element.split( ' ' );
+        first = nameArray.slice( 0, 1 );
+        last = nameArray.slice( 1 );
+        fullName = last + ', ' + first;
+        newArray.push( fullName );
+        return newArray.sort();
+    });
 }
 
-console.log(getRelationship(1,4));
-console.log(getRelationship(1,1));
-console.log(getRelationship("that",2));
-console.log(getRelationship("this"," something else"));
-console.log(getRelationship(3));
-console.log(getRelationship("hi"));
-console.log(getRelationship(NaN));
-console.log(getRelationship(NaN, 1));
+// Try logging your results to test your code!
+console.log(alphabetizer(moonWalkers));
