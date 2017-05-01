@@ -26,6 +26,7 @@ gulp.task( 'styles', function(){
         } ) )
         .pipe( sourcemaps.write( './maps' ) )
         .pipe( gulp.dest( 'app/css' ) )
+        .pipe( reload({ stream: true }))
 } );
 
 gulp.task( 'useref', function(){
@@ -66,7 +67,7 @@ gulp.task( 'browser', function(){
         }
     } );
 
-    gulp.watch( 'app/css/sass/*.scss', [ 'styles' ] );
+    gulp.watch( 'app/css/**/*.scss', [ 'styles' ] );
     gulp.watch( 'app/*.html', reload );
     gulp.watch( 'app/js/**/*.js', reload );
 } );
